@@ -1,0 +1,15 @@
+pip install Flask
+pip install requests
+pip install beautifulsoup4
+pip install Flask-SQLAlchemy
+pip install flask-login
+pip install Flask-WTF -
+pip install email_validator -
+pip install python-dotenv
+
+flask shell
+
+flask --app parser create_categories
+flask --app parser create_crypto_items
+
+flask --app main run

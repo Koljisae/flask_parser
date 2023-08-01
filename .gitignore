@@ -1,0 +1,8 @@
+/.env
+/test.py
+/.idea/vcs.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/misc.xml
+/.idea/flask_parser.iml
+/.idea/.gitignore
