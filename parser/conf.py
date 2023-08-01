@@ -5,8 +5,8 @@ load_dotenv()
 
 
 # COINMARKETCAP API
-TEST_API_CRYPTO_URL = 'https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 # API_CRYPTO_URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
+TEST_API_CRYPTO_URL = 'https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 API_CRYPTO_URL = TEST_API_CRYPTO_URL
 HEADERS = {
     'Accepts': 'application/json',
@@ -70,11 +70,6 @@ CRYPTO = (
         'category': 2,
         'title': 'Litecoin',
         'api_key': 'LTC',
-    },
-    {
-        'category': 2,
-        'title': 'Shiba Inu',
-        'api_key': 'SHIB',
     },
     {
         'category': 2,

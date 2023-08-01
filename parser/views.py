@@ -1,4 +1,3 @@
-import requests
 from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, Blueprint
 from bs4 import BeautifulSoup as bs
@@ -47,7 +46,23 @@ def get_crypto_data(api_key: str):
 @views.route('/home')
 @views.route('/')
 def home():
-    if current_user.is_authenticated:
-        return render_template('home.html', current_user=current_user)
-    else:
-        return redirect(url_for('auth.user_login'))
+    currencies = Item.query.filter_by(category=2)
+
+    # if current_user.is_authenticated:
+    return render_template('home.html', currencies=currencies)
+    # else:
+    #     return redirect(url_for('auth.user_login'))
+
+
+@views.route('/update_crypto')
+def update_crypto():
+    currencies = Item.query.filter_by(category=2)
+    for currency in currencies:
+        data = get_crypto_data(currency.api_key)
+        currency.price = data.get('price')
+        currency.market_cap = data.get('market_cap')
+        currency.change_percent = data.get('change_percent')
+        currency.change_value = data.get('change_value')
+        currency.last_updated = data.get('last_updated')
+        db.session.commit()
+    return redirect(url_for('views.home'))
