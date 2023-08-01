@@ -40,7 +40,7 @@ def user_register():
             db.session.commit()
             login_user(user, remember=True)
             flash('Account successfully created!', category='success')
-            return redirect(url_for('auth.home_page'))
+            return redirect(url_for('views.home'))
     return render_template('register.html')
 
 
@@ -55,7 +55,7 @@ def user_login():
             if check_password_hash(user.password_hash, password):
                 flash('You successfully logged in!', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('auth.home_page'))
+                return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -68,4 +68,4 @@ def user_login():
 @auth.route('/logout')
 def user_logout():
     logout_user()
-    return redirect(url_for('auth.home_page'))
+    return redirect(url_for('auth.user_login'))

@@ -2,6 +2,7 @@ import requests
 from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, Blueprint
 from bs4 import BeautifulSoup as bs
+from flask_login import current_user
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
@@ -45,5 +46,8 @@ def get_crypto_data(api_key: str):
 
 @views.route('/home')
 @views.route('/')
-def home_page():
-    return render_template('home.html')
+def home():
+    if current_user.is_authenticated:
+        return render_template('home.html', current_user=current_user)
+    else:
+        return redirect(url_for('auth.user_login'))
