@@ -34,7 +34,7 @@ def user_register():
             user = User(
                 username=username,
                 email_address=email_address,
-                password_hash=generate_password_hash(password1, method='sha256'),
+                password_hash=generate_password_hash(password1, method='scrypt'),
             )
             db.session.add(user)
             db.session.commit()
