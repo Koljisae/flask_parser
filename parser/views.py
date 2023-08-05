@@ -43,15 +43,14 @@ def get_crypto_data(api_key: str):
         return e
 
 
-@views.route('/home')
-@views.route('/')
-def home():
-    currencies = Item.query.filter_by(category=2)
-
-    # if current_user.is_authenticated:
-    return render_template('home.html', currencies=currencies)
-    # else:
-    #     return redirect(url_for('auth.user_login'))
+@views.route('/home/<int:page>', methods=['GET'])
+@views.route('/<int:page>', methods=['GET'])
+@views.route('/home', methods=['GET'])
+@views.route('/', methods=['GET'])
+def home(page: int = 1):
+    per_page = 10
+    currencies = Item.query.filter_by(category=2).paginate(page=page, per_page=per_page, error_out=False)
+    return render_template('home.html', currencies=currencies, title='Home')
 
 
 @views.route('/update_crypto')
@@ -65,4 +64,4 @@ def update_crypto():
         currency.change_value = data.get('change_value')
         currency.last_updated = data.get('last_updated')
         db.session.commit()
-    return redirect(url_for('views.home'))
+    return redirect(url_for('views.home', title='Update crypto'))
