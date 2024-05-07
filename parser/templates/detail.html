@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container themed-container">
+        <h1>{{ currency.title }} - {{ currency.api_key }} to USD</h1>
+        <br>
+        <h2>$ {{ currency.price }}</h2>
+        <br>
+        <h3>Market cap: {{ currency.market_cap }}</h3>
+        <h3>Change(d): {{ currency.volume_change_24h }} $</h3>
+        <h3>Change: {{ currency.percent_change_24h }} %</h3>
+        <h3>Updated at {{ currency.last_updated.strftime('%Y-%m-%d %H:%m') }}</h3>
+    </div>
+{% endblock %}
