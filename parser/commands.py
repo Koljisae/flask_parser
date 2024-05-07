@@ -29,18 +29,15 @@ def create_categories():
 @commands.cli.command(name='create_crypto_items')
 @with_appcontext
 def create_crypto_items():
-    for item in CRYPTO:
-        title = item.get('title')
-        api_key = item.get('api_key')
+    for api_key in CRYPTO:
         if not Item.query.filter_by(
-            category=item.get('category'),
-            title=title,
+            category=2,
             api_key=api_key
         ).first():
             values = get_crypto_data(api_key)
-            item_model = Item(**item, **values)
+            item_model = Item(api_key=api_key, **values)
             db.session.add(item_model)
             db.session.commit()
-            print(f'Crypto "{title}" added.')
+            print(f'Crypto "{api_key}" added.')
         else:
-            print(f'Crypto "{title}" already exists.')
+            print(f'Crypto "{api_key}" already exists.')
